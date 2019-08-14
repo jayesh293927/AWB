@@ -32,46 +32,21 @@
 
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">AWB</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="about.html">ABOUT</a>
-                    </li>
-                    <li>
-                        <a href="gallery.html">GALLERY</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">CONTACT US</a>
-                    </li>
-                   <li>
-                        <a href="events.html">EVENTS</a>
-                    </li>
-                    <li>
-                        <a href="blog-home-1.html">BLOG</a>
-                    </li>
-                    <li>
-                        <a href="sidebar.html">CHORD CHARTS</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#header").load("header.html");
+            $("#footer").load("footer.html");
+        });
+    </script>
+
+    <div id="header"></div>
 
     <!-- Page Content -->
     <div class="container">
@@ -97,10 +72,6 @@
                 <img class="img-responsive" src="http://placehold.it/1200x300" alt="1234">
             </div>
         </div>
-        <!-- /.row -->
-
-      
-        <!-- /.row -->
 
         <hr>
         <!-- Team Members -->
@@ -115,7 +86,7 @@
                         <h3>Christian Alex<br>
                             <small>CA</small>
                         </h3>
-                        
+
                         <ul class="list-inline">
                             <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
                             </li>
@@ -127,14 +98,14 @@
                     </div>
                 </div>
             </div>
- <div class="col-md-4 text-center">
+            <div class="col-md-4 text-center">
                 <div class="thumbnail">
                     <img class="img-responsive" src="./images/img4.jpg" alt="">
                     <div class="caption">
                         <h3>Christian Alex<br>
                             <small>CA</small>
                         </h3>
-                        
+
                         <ul class="list-inline">
                             <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
                             </li>
@@ -146,14 +117,14 @@
                     </div>
                 </div>
             </div>
- <div class="col-md-4 text-center">
+            <div class="col-md-4 text-center">
                 <div class="thumbnail">
                     <img class="img-responsive" src="./images/img4.jpg" alt="">
                     <div class="caption">
                         <h3>Christian Alex<br>
                             <small>CA</small>
                         </h3>
-                        
+
                         <ul class="list-inline">
                             <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
                             </li>
@@ -165,14 +136,14 @@
                     </div>
                 </div>
             </div>
- <div class="col-md-4 text-center">
+            <div class="col-md-4 text-center">
                 <div class="thumbnail">
                     <img class="img-responsive" src="./images/img4.jpg" alt="">
                     <div class="caption">
                         <h3>Christian Alex<br>
                             <small>CA</small>
                         </h3>
-                        
+
                         <ul class="list-inline">
                             <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
                             </li>
@@ -184,14 +155,14 @@
                     </div>
                 </div>
             </div>
- <div class="col-md-4 text-center">
+            <div class="col-md-4 text-center">
                 <div class="thumbnail">
                     <img class="img-responsive" src="./images/img4.jpg" alt="">
                     <div class="caption">
                         <h3>Christian Alex<br>
                             <small>CA</small>
                         </h3>
-                        
+
                         <ul class="list-inline">
                             <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
                             </li>
@@ -203,14 +174,14 @@
                     </div>
                 </div>
             </div>
- <div class="col-md-4 text-center">
+            <div class="col-md-4 text-center">
                 <div class="thumbnail">
                     <img class="img-responsive" src="./images/img4.jpg" alt="">
                     <div class="caption">
                         <h3>Christian Alex<br>
                             <small>CA</small>
                         </h3>
-                        
+
                         <ul class="list-inline">
                             <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
                             </li>
@@ -223,24 +194,21 @@
                 </div>
             </div>
 
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; ALMIGHTY WORSHIP BAND 2019</p>
+            <!-- Footer -->
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Copyright &copy; ALMIGHTY WORSHIP BAND 2019</p>
+                    </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
 
+        </div>
+
+        <div id="footer"></div>
+        
     </div>
     <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
 </body>
 
 </html>
