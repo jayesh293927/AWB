@@ -108,3 +108,11 @@ footer {
 .breadcrumb>.active {
     color:ghostwhite;
 }
+
+.form-group>label,span {
+    color:darkgray;
+}
+.form-group.required .control-label:after{
+    content:"*";
+    color:red; 
+}
