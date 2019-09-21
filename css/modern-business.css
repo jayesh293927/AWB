@@ -109,9 +109,14 @@ footer {
     color:ghostwhite;
 }
 
-.form-group>label,span {
+/* .form-group>label,span {
+    color:darkgray;
+} */
+
+.themelabel{
     color:darkgray;
 }
+
 .form-group.required .control-label:after{
     content:"*";
     color:red; 
