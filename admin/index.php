@@ -1,7 +1,6 @@
 <?php
-include_once('login.php'); // Includes Login Script
+session_start();
 include_once('utility.php');
-
 if(isset($_SESSION['login_user']) && isLoginSessionExpired()){
     header("Location:logout.php?session_expired=1");
 }else if(isset($_SESSION['login_user']) && !isLoginSessionExpired()) {
@@ -26,22 +25,35 @@ if(isset($_SESSION['login_user']) && isLoginSessionExpired()){
     <script src="../js/bootstrap.min.js"></script>
 
     <script>
-        function validate() {
-            var $valid = true;
-            var userName = $("#user_name").val();
-            var password = $("#password").val();
-            if(userName == "") 
-            {
-                $("#user_info").text("required");
-                $valid = false;
-            }
-            else if(password == "") 
-            {
-                $("#password_info").text("required");
-                $valid = false;
-            }
-            return $valid;
-        }
+        $(document).ready(function() { 
+            $("#frmLogin").submit(function(event){
+                var userName = $("#user_name").val();
+                var password = $("#password").val();
+                if(userName == "") 
+                {
+                    $("#user_name").focus();
+                    return false;
+                }
+                else if(password == "") 
+                {
+                    $("#password").focus();
+                    return false;
+                }
+                $.ajax({
+                    type: 'post',
+                    url: 'login.php',
+                    data: {'userName': userName, 'password': password},
+                    success: function (response) {//response is value returned from php 
+                        if (response == "Success"){
+                            window.location = "profile.php";
+                        }else {
+                            $("#errorMessage").html(response);
+                        }
+                    }
+                });
+                event.preventDefault();
+            });
+        });
     </script>
 
     <div id="header"></div>
@@ -56,29 +68,18 @@ if(isset($_SESSION['login_user']) && isLoginSessionExpired()){
         </div>
         <!-- /.row -->
 
-        <form action="" method="post" id="frmLogin" onSubmit="return validate();">
-            <?php 
-                if(isset($_SESSION["`error`Message"])) {
-                ?>
-            <div class="error-message">
-                <?php  echo $_SESSION["errorMessage"]; ?>
-            </div>
-            <?php 
-                unset($_SESSION["errorMessage"]);
-                } 
-                ?>
+        <form id="frmLogin">
             <div class="row">
                 <div class="form-group required">
-                        <label class="control-label" for="username">Username</label><span id="user_info" class="error-info"></span>
+                        <label class="control-label themelabel" for="username">Username</label>
                         <input name="user_name" id="user_name" type="text"  class="form-control">
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group required">
-                        <label class="control-label" for="password">Password</label><span id="password_info" class="error-info"></span>
-            
-                        <input name="password" id="password" type="password"  class="form-control">
+                        <label class="control-label themelabel" for="password">Password</label><span id="password_info" class="error-info"></span>
+                        <input name="password" id="password" type="password" class="form-control">
                 </div>
             </div>
                 
@@ -89,7 +90,11 @@ if(isset($_SESSION['login_user']) && isLoginSessionExpired()){
                 </div>
             </div>
 
-            <span><?php echo $error; ?></span>
+            <span class="themelabel" id="errorMessage"></span>
         </form>
         <div id="footer"></div>
     </div>
+
+</body>
+
+</html>

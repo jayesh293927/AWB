@@ -1,6 +1,7 @@
 <?php
+
 function isLoginSessionExpired() {
-	$login_session_duration = 10; 
+	$login_session_duration = 20; 
 	$current_time = time(); 
 	if(isset($_SESSION['loggedin_time']) and isset($_SESSION["login_user"])){  
 		if(((time() - $_SESSION['loggedin_time']) > $login_session_duration)){ 
@@ -10,7 +11,7 @@ function isLoginSessionExpired() {
 	return false;
 }
 
-function getConnection(){
+function getConnection() {
 	$host_name = parse_ini_file("awb_config.ini")['dbHostName'];
 	$user_name = parse_ini_file("awb_config.ini")['dbUserName'];
 	$password = parse_ini_file("awb_config.ini")['dbPassword'];

@@ -26,13 +26,19 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="../index.html">AWB</a>
+                    <a class="navbar-brand" href="../index.php">AWB</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                    <li>
+                        <li>
                             <a href="profile.php">Profile</a>
+                        </li>
+                        <li>
+                            <a href="manage_gallery.php">Manage Gallery</a>
+                        </li>
+                        <li>
+                            <a href="manage_chords.php">Manage Chords</a>
                         </li>
                         <li>
                             <a href="manage_user.php">Manage User</a>

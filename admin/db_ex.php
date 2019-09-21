@@ -1,4 +1,3 @@
-
 <?php
 $host_name = parse_ini_file("awb_config.ini")['dbHostName'];
 $user_name = parse_ini_file("awb_config.ini")['dbUserName'];

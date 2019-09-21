@@ -49,25 +49,26 @@ include_once('utility.php');
 
 </script>
 
+<br><br>
 <div class="container">
     <form action="" method="post" id="frmChangePassword">
         <div class="row">
             <div class="form-group required">   
-                <label class="control-label" for="current_password">Current Password</label><span id="current_password_info"></span>
+                <label class="control-label themelabel" for="current_password">Current Password</label><span id="current_password_info"></span>
             
                 <input name="current_password" id="current_password" type="text"  class="form-control">
             </div>
         </div>
         <div class="row">
             <div class="form-group required">
-                <label class="control-label" for="new_password">New Password</label><span id="new_password_info"></span>
+                <label class="control-label themelabel" for="new_password">New Password</label><span id="new_password_info"></span>
                 <input name="new_password" id="new_password" type="password"  class="form-control">
             </div>
         </div>
         
         <div class="row">
             <div class="form-group required">
-                    <label class="control-label" for="confirm_password">Confirm Password</label><span id="confirm_password_info"></span>
+                    <label class="control-label themelabel" for="confirm_password">Confirm Password</label><span id="confirm_password_info"></span>
                     <input name="confirm_password" id="confirm_password" type="password"  class="form-control">
             </div>
         </div>

@@ -18,6 +18,5 @@ if (count($_POST) > 0) {
 }
 mysqli_close($connection); // Closing Connection
 }
-
 echo ($message);
 ?>
