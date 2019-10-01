@@ -41,7 +41,6 @@
                 data: {'action' : 'get_gallery_details'},
                 success: function (response) {
                     images_details_obj = JSON.parse(response);
-                    console.log(images_details_obj);
                     counter = 1;
                     for (img_obj in images_details_obj) {
                         iCol = "";
@@ -60,7 +59,6 @@
     <div id="data" class="container">
 
         <div class="row">
-            <div class="col-lg-12">
                 <h1 class="page-header myheader">Gallery
                     <small class="myheader">Almighty Worship Band</small>
                 </h1>
@@ -69,7 +67,6 @@
                     </li>
                     <li class="active">Gallery</li>
                 </ol>
-            </div>
         </div>
 
         <div class="gallery" id="gallery">

@@ -1,0 +1,80 @@
+<head>
+    <title>Videos</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/modern-business.css" rel="stylesheet">
+
+</head>
+
+<body>
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+<script>
+    function createCol(videoPath) {
+            return ` <div class="col-md-6" style="padding:20px;">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" allowfullscreen src="` + videoPath +`">
+                </iframe>
+            </div>
+        </div>`;
+        }
+    $(document).ready(function () {
+            $("#header").load("header.html");
+            $("#footer").load("footer.html");
+            $.ajax({
+                url: "admin/video_details.php",
+                type: "GET",
+                data: {'action' : 'get_video_details'},
+                success: function (response) {
+                    video_details_obj = JSON.parse(response);
+                    for (video_obj in video_details_obj) {
+                        iCol = "";
+                        iCol = createCol(video_details_obj[video_obj]['video_path']);
+                        $('#video_data').append($(iCol));
+                    }
+                }
+    });
+ });
+
+</script>
+
+<div id="header"></div>
+
+<!-- Page Content -->
+<div id="video_data" class="container">
+
+        <!-- <div class="col-md-6" style="padding:20px;">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" allowfullscreen src="https://www.youtube.com/embed/4QHGBSU0TGM">
+                </iframe>
+            </div>
+        </div>
+        <div class="col-md-6" style="padding:20px;">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" allowfullscreen src="https://www.youtube.com/embed/Jn0WyOa9Nhs">
+                </iframe>
+            </div>
+        </div>
+   
+        <div class="col-md-6" style="padding:20px;" >
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" allowfullscreen src="https://www.youtube.com/embed/GXEtzGE_yT0">
+                </iframe>
+            </div>
+        </div>
+        <div class="col-md-6" style="padding:20px;">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" allowfullscreen src="https://www.youtube.com/embed/68YvV2OGjBg">
+                </iframe>
+            </div>
+        </div> -->
+</div>
+
+</body>

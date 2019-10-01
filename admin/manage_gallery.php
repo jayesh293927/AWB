@@ -172,7 +172,7 @@ if (!isset($_SESSION['login_user'])){
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-danger" id="confirm">Delete</button>
+            <button type="button" class="btn btn-danger" value="Refresh Page" onClick="window.location.reload();" id="confirm">Delete</button>
           </div>
         </div>
       </div>

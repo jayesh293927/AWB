@@ -38,10 +38,16 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
+
     <script>
         function createCol(chord_path, chord_name) {
+<<<<<<< HEAD
             return `<div class="col-md-6 text-center fa fa-file-pdf-o" style="font-size:24px;color:red">
                     <a target="_blank" href="`+ chord_path + chord_name + `" alt="">"`+ chord_name+ `"</a>
+=======
+            return `<div class="col-md-6">
+                    <a target="_blank" href="`+ chord_path + chord_name + `" style="text-decoration: none;">`+ chord_name+ `</a>
+>>>>>>> 028f5c732e770b3b3384878e4fdf3d58751afd90
             </div>`;
         }
         $(document).ready(function () {
@@ -53,11 +59,6 @@
                 data: {'action' : 'get_chord_details'},
                 success: function (response) {
                     chords_details_obj = JSON.parse(response);
-                    console.log(chords_details_obj);
-                    counter = 1;
-                    iData = "";
-                    iRow = "";
-                    iCol = "";
                     for (chord_obj in chords_details_obj) {
                         iCol = "";
                         iCol = createCol(chords_details_obj[chord_obj]['chord_path'], chords_details_obj[chord_obj]['chord_name']);
@@ -76,7 +77,6 @@
 
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
-            <div class="col-lg-12">
                 <h1 class="page-header myheader">Chord Charts
                     <small class="myheader">Almighty Worship Band</small>
                 </h1>
@@ -85,11 +85,11 @@
                     </li>
                     <li class="active">Chord Charts</li>
                 </ol>
-            </div>
+            
         </div>
         <!-- /.row -->
 
-        <div id="chord">
+        <div id="chord" class="row" style="background-color:black;padding: 20px;">
 
         </div>
 

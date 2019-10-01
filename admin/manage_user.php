@@ -20,7 +20,6 @@ include_once('ui_utility.php');
             data : {'action' : 'get_user_details'},
             success: function (response) {
                 user_details_obj = JSON.parse(response);
-                iCol = "";
                 for (user_obj in user_details_obj) {
                     iCol = "";
                     user = user_details_obj[user_obj];
@@ -70,7 +69,6 @@ include_once('ui_utility.php');
         
         <!-- Form confirm (yes/ok) handler, submits form -->
         $('#confirmDelete').find('.modal-footer #confirm').on('click', function(){
-            console.log('dharmendra');
             $.ajax({
                 type: 'post',
                 url: 'user_details.php',
