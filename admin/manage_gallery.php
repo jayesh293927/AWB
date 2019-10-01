@@ -159,7 +159,7 @@ if (!isset($_SESSION['login_user'])){
 
     </div>
 
-     <!-- Modal Dialog for delete confirmition -->
+     <!-- Modal Dialog for delete confirmition -->  
     <div class="modal fade" id="confirmDelete" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
