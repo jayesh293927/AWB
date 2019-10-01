@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>AWB</title>
 
     <!-- Bootstrap Core CSS -->
@@ -39,11 +40,10 @@
 
     <script>
         function createCol(chord_path, chord_name) {
-            return `<div class="col-md-6 text-center">
+            return `<div class="col-md-6 text-center fa fa-file-pdf-o" style="font-size:24px;color:red">
                     <a target="_blank" href="`+ chord_path + chord_name + `" alt="">"`+ chord_name+ `"</a>
             </div>`;
         }
-
         $(document).ready(function () {
             $("#header").load("header.html");
             $("#footer").load("footer.html");
