@@ -14,6 +14,7 @@ if (!isset($_SESSION['login_user'])){
       <link href="../css/modern-business.css" rel="stylesheet">
 </head>
 
+<script src="../js/jquery.toaster.js"></script>
 <script type="text/javascript" src="../js/jquery.form.js"></script>
 <script>
     function createCol(imageName, image_id) {
@@ -33,16 +34,8 @@ if (!isset($_SESSION['login_user'])){
             </div>`;
     }
 
-    $(document).ready(function () {
-        $('#uploadImages').click(function(){
-            $('#viewImagesContainer').hide();
-            $('#uploadImagesContainer').show();
-        });
-        
-        $('#viewImages').click(function(){
-            $('#uploadImagesContainer').hide();
-            $('#viewImagesContainer').show();
-            $.ajax({
+    function get_gallery() {
+        $.ajax({
                 url: "gallery_details.php",
                 type: "GET",
                 data: {'action' : 'get_gallery_details'},
@@ -56,6 +49,17 @@ if (!isset($_SESSION['login_user'])){
                     }
                 }
             });
+    }
+    $(document).ready(function () {
+        $('#uploadImages').click(function(){
+            $('#viewImagesContainer').hide();
+            $('#uploadImagesContainer').show();
+        });
+        
+        $('#viewImages').click(function(){
+            $('#uploadImagesContainer').hide();
+            $('#viewImagesContainer').show();
+            get_gallery();
         });
 
         $('#deleteImages').click(function(){
@@ -91,18 +95,18 @@ if (!isset($_SESSION['login_user'])){
             
 
         $('#confirmDelete').find('.modal-footer #confirm').on('click', function(){
-            console.log('dharmendra');
+            image_id = $(this).data('image_id');
             $.ajax({
                 type: 'post',
                 url: 'gallery_details.php',
-                data: {'action': 'delete_image', 'image_id': $(this).data('image_id')},
+                data: {'action': 'delete_image', 'image_id': image_id},
                 success: function (response) {
                    $("#confirmDelete").modal("hide");
+                   get_gallery();
+                   $.toaster({ message : 'image deleted successfully', title : 'Success', priority : 'success' });
                 }
             });
         });
-        //location.reload(forceGet);
-        //window.location.reload(true);
     });
   
 </script>
@@ -153,7 +157,7 @@ if (!isset($_SESSION['login_user'])){
         <div id="viewImagesContainer" style="display:none;">
         <button id="deleteImages" type="button" class="btn btn-primary">Delete Images</button>
         <br><br>
-        <div class="gallery" id="gallery" >
+        <div class="gallery" id="gallery">
         </div>
         </div>
 
@@ -172,7 +176,7 @@ if (!isset($_SESSION['login_user'])){
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-danger" value="Refresh Page" onClick="window.location.reload();" id="confirm">Delete</button>
+            <button type="button" class="btn btn-danger" id="confirm">Delete</button>
           </div>
         </div>
       </div>
