@@ -19,13 +19,12 @@
 
     <script>
 
-        function createCol(imageName) {
+        function createCol(imageName, imageDescription) {
             return `<div class="col-md-6 text-center">
                 <div class="thumbnail">
                     <img class="img-responsive" src="`+ imageName + `" alt="">
                     <div class="caption">
-                        <h3>Christian Alex<br>
-                            <small>CA</small>
+                        <h3>` + imageDescription + `<br>
                         </h3>
                     </div>
                 </div>
@@ -44,7 +43,7 @@
                     counter = 1;
                     for (img_obj in images_details_obj) {
                         iCol = "";
-                        iCol = createCol(images_details_obj[img_obj]['image_path'] + images_details_obj[img_obj]['image_name']);
+                        iCol = createCol(images_details_obj[img_obj]['image_path'] + images_details_obj[img_obj]['image_name'], images_details_obj[img_obj]['image_description']);
                         $('#gallery').append($(iCol));
                     }
                 }
