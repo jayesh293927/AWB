@@ -1,4 +1,9 @@
-    <!-- Bootstrap Core CSS -->
+<!-- References:-
+https://github.com/scottoffen/jquery.toaster
+http://malsup.com/jquery/form/#options-object 
+-->
+
+<!-- Bootstrap Core CSS -->
  <link href="../css/bootstrap.min.css" rel="stylesheet">
 <!-- jQuery -->
 
@@ -13,6 +18,9 @@
  <script>
 
       $(document).ready(function() { 
- $.toaster({ message : 'user added', title : 'Success', priority : 'success' });
+          $.toaster({ message : 'It is for success', title : 'Success', priority : 'success' });
+          $.toaster({ message : 'It is for danger', title : 'Error', priority : 'danger' });
+          $.toaster({ message : 'It is for info', title : 'Info', priority : 'info' });
+          $.toaster({ message : 'It is for warning', title : 'Warning', priority : 'warning' });
       });
 </script>

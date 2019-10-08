@@ -17,13 +17,12 @@ if (!isset($_SESSION['login_user'])){
 <script src="../js/jquery.toaster.js"></script>
 <script type="text/javascript" src="../js/jquery.form.js"></script>
 <script>
-    function createCol(imageName, image_id) {
+    function createCol(imageName, image_id, imageDescription) {
             return `<div class="col-md-6 text-center">
                 <div class="thumbnail">
                     <img class="img-responsive" src="`+ imageName + `" alt="">
                     <div class="caption">
-                        <h3>Christian Alex<br>
-                            <small>CA</small>
+                        <h3>` + imageDescription + `<br>
                         </h3>
                     </div>
                     <button id="` + image_id +`" class="btn btn-sm btn-danger" type="button" data-toggle="modal" 
@@ -44,13 +43,14 @@ if (!isset($_SESSION['login_user'])){
                     images_details_obj = JSON.parse(response);
                     for (img_obj in images_details_obj) {
                         iCol = "";
-                        iCol = createCol("../" + images_details_obj[img_obj]['image_path'] + images_details_obj[img_obj]['image_name'],images_details_obj[img_obj]['image_id']);
+                        iCol = createCol("../" + images_details_obj[img_obj]['image_path'] + images_details_obj[img_obj]['image_name'], images_details_obj[img_obj]['image_id'], images_details_obj[img_obj]['image_description']);
                         $('#gallery').append($(iCol));
                     }
                 }
             });
     }
     $(document).ready(function () {
+       
         $('#uploadImages').click(function(){
             $('#viewImagesContainer').hide();
             $('#uploadImagesContainer').show();
@@ -68,20 +68,44 @@ if (!isset($_SESSION['login_user'])){
             $('#deleteImagesContainer').show();
         });
         
-        $('#uploadForm').ajaxForm({
-            data : {'action' : 'upload_gallery'},
-            beforeSubmit: function () {
-                $('#uploadStatus').html('<img style="width:400px;height:200px;" src="../images/uploading.gif"/>');
-            },
-            success: function () {
-                $('#images').val('');
-                $('#uploadMsg').html('images uploaded successfully');
-                $('#uploadStatus').html('');
-            },
-            error: function () {
-                $('#uploadMsg').html('Images upload failed, please try again.');
+        $("#frmUploadImages").submit(function(event){
+            var image_description = $("#image_description").val();
+            var file_data = $('#images').prop('files');
+            if (file_data.length==0){
+                $("#images").focus();
+                return false;
             }
+            if(!image_description) {
+                $("#image_description").focus();
+                return false;
+            }
+            $('#uploadStatus').html('<img style="width:400px;height:200px;" src="../images/uploading.gif"/>');
+            var form_data = new FormData();
+            for (i=0; i<$('#images').prop('files').length; i++){
+                form_data.append('images[]', $('#images').prop('files')[i]);
+            }
+            form_data.append('action', 'upload_gallery');
+            form_data.append('image_description', image_description);
+            $.ajax({
+                url: 'gallery_details.php',
+                cache: false,
+                type: 'POST',
+                data: form_data,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    $('#uploadStatus').html('');
+                    $.toaster({ message : 'images uploaded successfully', title : 'Success', priority : 'success' });
+                    $("#image_description").val('')
+                    $("#images").val('');
+                },
+                error: function() {
+                    $.toaster({ message : 'Failed to upload images', title : 'Error', priority : 'danger' });
+                }
+            });
+            event.preventDefault();
         });
+
           //changing
         $('#confirmDelete').on('show.bs.modal', function (e) {
                 $message = $(e.relatedTarget).attr('data-message');
@@ -93,7 +117,6 @@ if (!isset($_SESSION['login_user'])){
                 $(this).find('.modal-footer #confirm').data('image_id', $(e.relatedTarget)[0]['id']);
         });
             
-
         $('#confirmDelete').find('.modal-footer #confirm').on('click', function(){
             image_id = $(this).data('image_id');
             $.ajax({
@@ -123,18 +146,24 @@ if (!isset($_SESSION['login_user'])){
 
         <!-- images upload form -->
         <div id="uploadImagesContainer" style="display:none;">
-            
-            <form method="post" id="uploadForm" enctype="multipart/form-data" action="gallery_details.php">
+            <form id="frmUploadImages">
                 <div class="row">
-                    <div class="form-group">
+                    <div class="form-group required">
                         <label class="control-label themelabel" for="images">Choose Images</label>
                         <input class="form-group" type="file" name="images[]" id="images" multiple >
                     </div>    
                 </div>
 
                 <div class="row">
+                    <div class="form-group required">
+                        <label class="control-label themelabel" for="image_description">Image Description:</label>
+                        <input type="text" class="form-control" id="image_description">
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="form-group">
-                        <input class="btn btn-primary" type="submit" name="submit" value="UPLOAD"/>
+                        <input id="uploadGallery" class="btn btn-primary" type="submit" value="Upload Image"/>
                     </div>
                 </div>
 
@@ -183,3 +212,4 @@ if (!isset($_SESSION['login_user'])){
     </div>
 
 </body>
+

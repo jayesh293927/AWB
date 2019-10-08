@@ -7,13 +7,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $image_details = array();
         $image_details_obj = array();
         $connection = getConnection();
-        $query = mysqli_query($connection, "select image_id, image_name, image_path from galleryimagedetails");
+        $query = mysqli_query($connection, "select image_id, image_name, image_path, image_description from galleryimagedetails");
         $counter=1;
         while ($row = $query->fetch_assoc()) {
             if (mysqli_num_rows($query)>0){
                 $image_details_obj["image_id"] =  $row["image_id"];
                 $image_details_obj["image_name"] = $row["image_name"];
                 $image_details_obj["image_path"] = $row["image_path"];
+                $image_details_obj["image_description"] = $row["image_description"];
                 array_push($image_details, $image_details_obj);
             }
         }
@@ -28,6 +29,7 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // File upload configuration
             $targetDir = "../uploads/gallery/";
             $allowTypes = array('jpg','png','jpeg');
+            $image_description = $_POST['image_description'];
             
             $images_arr = array();
             $image_details = array();
@@ -57,7 +59,7 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             $connection = getConnection();
             foreach($image_details as $key=>$val) {
-                $insert_query = "insert into galleryimagedetails (image_name,image_path) values ('". $val["image_name"]. "','". $val["image_dir"] . "')";
+                $insert_query = "insert into galleryimagedetails (image_name,image_path, image_description) values ('". $val["image_name"]. "','". $val["image_dir"] . "','". $image_description . "')";
                 if(mysqli_query($connection, $insert_query)) {
                     $message = "record inserted";
                 }else{
@@ -77,6 +79,6 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         mysqli_close($connection);
         echo $message;
-    }
+        }
 }
 ?>
