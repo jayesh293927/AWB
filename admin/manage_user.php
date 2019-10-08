@@ -13,12 +13,13 @@ include_once('ui_utility.php');
             <i class="glyphicon glyphicon-trash"></i> Delete</button></td></tr>`;
     }
 
-    $(document).ready(function () {
-        $.ajax({
+    function get_users(){
+      $.ajax({
             type: 'get',
             url: 'user_details.php',
             data : {'action' : 'get_user_details'},
             success: function (response) {
+                $('#userdetails').html("");
                 user_details_obj = JSON.parse(response);
                 for (user_obj in user_details_obj) {
                     iCol = "";
@@ -28,18 +29,26 @@ include_once('ui_utility.php');
                 }
             }
         });
+    }
+    $(document).ready(function () {
+        get_users();
 
         $("#saveUser").click(function(e){
+            if ($("[class='error']").length > 0) {
+                $("[class='error']").remove();
+            }
             userName = $("#userName").val();
             password = $("#password").val();
             contactNumber = $("#contactNumber").val();
             emailId = $("#emailId").val();
             if(!userName) {
                 $("#userName").focus();
+                $("label[for='userName']").after('<span class="error">This field is required</span>');
                 return false;
             }
             else if(!password) {
                 $("#password").focus();
+                $("label[for='password']").after('<span class="error">This field is required</span>');
                 return false;
             }
             $.ajax({
@@ -47,12 +56,21 @@ include_once('ui_utility.php');
                 url: 'user_details.php',
                 data: {'action': 'create_user', 'username': userName, 'password': password, 'emailId':emailId, 'contactNumber':contactNumber},
                 success: function (response) {
-                    $("#userName").val("");
-                    $("#password").val("");
-                    $("#contactNumber").val("");
-                    $("#emailId").val("");
-                    $("#addUserModal").modal('hide');
-                    $.toaster({ message : 'user created successfully', title : 'Success', priority : 'success' });
+                  jObject = JSON.parse(response);
+                  if(jObject['Success']) {
+                      $("#userName").val("");
+                      $("#password").val("");
+                      $("#contactNumber").val("");
+                      $("#emailId").val("");
+                      $("#addUserModal").modal('hide');
+                      $.toaster({ message : jObject['Success'], title : 'Success', priority : 'success' });
+                      get_users();
+                  } else {
+                      $.toaster({ message :  jObject['error']['msg'], title : 'Error', priority : 'danger' });
+                  }
+                },
+                error: function() {
+                    $.toaster({ message : 'Failed to create user', title : 'Error', priority : 'danger' });
                 }
             });
         });
@@ -74,8 +92,17 @@ include_once('ui_utility.php');
                 url: 'user_details.php',
                 data: {'action': 'delete_user', 'user_id': $(this).data('user_id')},
                 success: function (response) {
-                   $("#confirmDelete").modal("hide");
-                   $.toaster({ message : 'user deleted successfully', title : 'Success', priority : 'success' });
+                  jObject = JSON.parse(response);
+                  if(jObject['Success']) {
+                      $("#confirmDelete").modal("hide");
+                      $.toaster({ message : jObject['Success'], title : 'Success', priority : 'success' });
+                      get_users();
+                  } else {
+                      $.toaster({ message :  jObject['error']['msg'], title : 'Error', priority : 'danger' });
+                  }
+                },
+                error: function() {
+                   $.toaster({ message : 'Failed to delete user', title : 'Error', priority : 'danger' });
                 }
             });
         });
@@ -144,9 +171,9 @@ include_once('ui_utility.php');
 <!-- end of modal dialog -->
 
 <br><br>
-<div class="container">
+<div class="container" style="background-color:azure; padding:30px;">
     <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addUserModal" >Add User</button>
-    <div class="row custyle" style="background-color:azure;">
+    <div class="row custyle">
     <table id="userdetails" class="table table-striped custab">
     <thead>
         <tr>

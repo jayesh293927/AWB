@@ -1,0 +1,80 @@
+<!-- This file is used for reference purpose which represents how we can validate data of html components -->
+
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<!-- <meta content="utf-8"> -->
+</head>
+
+<!-- jQuery -->
+ <script src="../js/jquery.js"></script>
+
+<style>
+.error {
+  color: red;
+  margin-left: 10px;
+}
+</style>
+
+
+<script>
+$(document).ready(function() {
+    $("#frmChangePassword").submit(function(e){
+        e.preventDefault();
+        current_password = $("#current_password").val();
+        new_password = $("#new_password").val();
+        confirm_password = $("#confirm_password").val();
+        if(!current_password){
+            $('#current_password').after('<span class="error">This field is required</span>');
+            return false;
+        }
+        else if(!new_password) {
+            $("#new_password").focus();
+            $("#new_password").after('<span class="error">This field is required</span>');
+            return false;
+        }
+        else if(!confirm_password) {
+            $("#confirm_password").focus();
+            $("#confirm_password").after('<span class="error">This field is required</span>');
+            return false;
+        }
+        console.log("dharmendra here");
+    });
+});
+</script>
+<div class="container" style="background-color:chocolate; padding:30px;">
+    <form action="" method="post" id="frmChangePassword">
+        <div class="row">
+            <div class="form-group required">   
+                <label class="control-label themelabel" for="current_password">Current Password</label>
+            
+                <input name="current_password" id="current_password" type="text"  class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group required">
+                <label class="control-label themelabel" for="new_password">New Password</label><span id="new_password_info"></span>
+                <input name="new_password" id="new_password" type="password"  class="form-control">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="form-group required">
+                    <label class="control-label themelabel" for="confirm_password">Confirm Password</label><span id="confirm_password_info"></span>
+                    <input name="confirm_password" id="confirm_password" type="password"  class="form-control">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="form-group">
+                <span id="error_message"></span>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="form-group">
+                        <input type="submit" name="submit" value="Submit"
+                        class="btn btn-primary"></span>
+            </div>
+        <div>
+    </form>
+</div>

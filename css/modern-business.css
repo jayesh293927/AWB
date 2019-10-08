@@ -136,3 +136,8 @@ background:url('../images/awb_pdf-icon.png');
 display:inline-block;
 content:' ';
 }
+
+.error {
+    color: red;
+    margin-left: 10px;
+}

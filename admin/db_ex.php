@@ -1,3 +1,5 @@
+<!-- This file is used for reference purpose which represents how we can create connection with database and perform query-->
+
 <?php
 
 $host_name = parse_ini_file("awb_config.ini")['dbHostName'];

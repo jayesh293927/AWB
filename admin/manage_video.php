@@ -5,10 +5,14 @@ include_once('ui_utility.php');
  <script>
         $(document).ready(function() { 
             $("#frmAddVideo").submit(function(event){
+                if ($("[class='error']").length > 0) {
+                    $("[class='error']").remove();
+                }
                 var videoPath = $("#video_path").val();
                 if(videoPath == "") 
                 {
                     $("#video_path").focus();
+                    $("label[for='video_path']").after('<span class="error">This field is required</span>');
                     return false;
                 }
                 $.ajax({
@@ -18,6 +22,9 @@ include_once('ui_utility.php');
                     success: function (response) {//response is value returned from php 
                         $.toaster({ message : 'video added successfully', title : 'Success', priority : 'success' });
                         $("#video_path").val("");
+                    },
+                    error: function() {
+                        $.toaster({ message : 'Failed to add video', title : 'Error', priority : 'danger' });
                     }
                 });
                 event.preventDefault();

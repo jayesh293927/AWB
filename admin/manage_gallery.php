@@ -69,14 +69,19 @@ if (!isset($_SESSION['login_user'])){
         });
         
         $("#frmUploadImages").submit(function(event){
+            if ($("[class='error']").length > 0) {
+                $("[class='error']").remove();
+            }
             var image_description = $("#image_description").val();
             var file_data = $('#images').prop('files');
             if (file_data.length==0){
                 $("#images").focus();
+                $("label[for='images']").after('<span class="error">This field is required</span>');
                 return false;
             }
             if(!image_description) {
                 $("#image_description").focus();
+                $("label[for='image_description']").after('<span class="error">This field is required</span>');
                 return false;
             }
             $('#uploadStatus').html('<img style="width:400px;height:200px;" src="../images/uploading.gif"/>');
@@ -94,10 +99,15 @@ if (!isset($_SESSION['login_user'])){
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    $('#uploadStatus').html('');
-                    $.toaster({ message : 'images uploaded successfully', title : 'Success', priority : 'success' });
-                    $("#image_description").val('')
-                    $("#images").val('');
+                    jObject = JSON.parse(response);
+                    if(jObject['Success']) {
+                        $('#uploadStatus').html('');
+                        $("#image_description").val('')
+                        $("#images").val('');
+                        $.toaster({ message : jObject['Success'], title : 'Success', priority : 'success' });
+                    } else {
+                        $.toaster({ message :  jObject['error']['msg'], title : 'Error', priority : 'danger' });
+                    }
                 },
                 error: function() {
                     $.toaster({ message : 'Failed to upload images', title : 'Error', priority : 'danger' });
@@ -124,9 +134,17 @@ if (!isset($_SESSION['login_user'])){
                 url: 'gallery_details.php',
                 data: {'action': 'delete_image', 'image_id': image_id},
                 success: function (response) {
-                   $("#confirmDelete").modal("hide");
-                   get_gallery();
-                   $.toaster({ message : 'image deleted successfully', title : 'Success', priority : 'success' });
+                  jObject = JSON.parse(response);
+                  if(jObject['Success']) {
+                    $("#confirmDelete").modal("hide");
+                    $.toaster({ message : jObject['Success'], title : 'Success', priority : 'success' });
+                    get_gallery();
+                  } else {
+                      $.toaster({ message :  jObject['error']['msg'], title : 'Error', priority : 'danger' });
+                  } 
+                },
+                error: function() {
+                    $.toaster({ message : 'Failed to delete image', title : 'Error', priority : 'danger' });
                 }
             });
         });

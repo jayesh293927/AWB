@@ -1,3 +1,5 @@
+<!-- This file is used for reference purpose which represents how we can do delete operations using jquery and php-->
+
 <?php
 include_once('ui_utility.php');
 ?>

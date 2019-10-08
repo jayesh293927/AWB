@@ -10,7 +10,7 @@ else
     $username=$_POST['userName'];
     $password=$_POST['password'];
     $connection = getConnection();
-    $query = mysqli_query($connection, "select * from userdetails where password='$password' AND username='$username'");
+    $query = mysqli_query($connection, "select user_id, username from userdetails where password='$password' AND username='$username'");
     $rows = mysqli_num_rows($query);
    
     if ($rows == 1) {

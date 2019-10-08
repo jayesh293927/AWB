@@ -1,3 +1,5 @@
+<!-- This file is used for reference purpose which represents modal popup-->
+
 <head>
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
