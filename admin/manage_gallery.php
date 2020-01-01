@@ -26,7 +26,7 @@ if (!isset($_SESSION['login_user'])){
                         </h3>
                     </div>
                     <button id="` + image_id +`" class="btn btn-sm btn-danger" type="button" data-toggle="modal" 
-                    data-target="#confirmDelete" data-title="Delete User" data-message="Are you sure you want to delete this user ?">
+                    data-target="#confirmDelete" data-title="Delete User" data-message="Are you sure you want to delete `+imageDescription+` ?">
                     <i class="glyphicon glyphicon-trash"></i> Delete
                     </button>
                 </div>
@@ -202,7 +202,7 @@ if (!isset($_SESSION['login_user'])){
 
         <!-- gallery view of uploaded images --> 
         <div id="viewImagesContainer" style="display:none;">
-        <button id="deleteImages" type="button" class="btn btn-primary">Delete Images</button>
+        <!-- <button id="deleteImages" type="button" class="btn btn-primary">Delete Images</button> -->
         <br><br>
         <div class="gallery" id="gallery">
         </div>

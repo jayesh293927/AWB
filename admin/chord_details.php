@@ -12,6 +12,7 @@ try {
             $query = mysqli_query($connection, "select chord_id, chord_name, chord_path from chorddetails");
             while ($row = $query->fetch_assoc()) {
                 if (mysqli_num_rows($query)>0){
+                    $chord_details_obj["chord_id"] = $row["chord_id"];
                     $chord_details_obj["chord_name"] = $row["chord_name"];
                     $chord_details_obj["chord_path"] = $row["chord_path"];
                     array_push($chord_details, $chord_details_obj);
@@ -67,6 +68,18 @@ try {
             } else {
                 $message = "pdf for chord details uploaded successfully";
                 getSuccessMsg($message);
+            }
+        }
+        else if ($_POST['action'] == 'delete_pdf') {
+            $chord_id = $_POST["chord_id"];
+            $delete_query = "delete from chorddetails where chord_id=". $chord_id;
+            $connection = getConnection();
+            if(mysqli_query($connection, $delete_query)) {
+                $message = "File deleted successfully";
+                getSuccessMsg($message);
+            }else{
+                $message = "Failed to delete File";
+                throw new Exception($message);
             }
         }
     }

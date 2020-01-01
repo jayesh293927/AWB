@@ -7,6 +7,7 @@ $user_name = parse_ini_file("awb_config.ini")['dbUserName'];
 $password = parse_ini_file("awb_config.ini")['dbPassword'];
 $datbase_name = parse_ini_file("awb_config.ini")['dbDatabaseName'];
 
+
 $connection = mysqli_connect($host_name, $user_name, $password, $datbase_name);
 // Check connection
 if (mysqli_connect_errno())
