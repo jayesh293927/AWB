@@ -110,6 +110,9 @@ footer {
 .myheader{
    color: beige; 
 }
+.myheader12{
+   color:black; 
+}
 
 .breadcrumb>.active {
     color:ghostwhite;
